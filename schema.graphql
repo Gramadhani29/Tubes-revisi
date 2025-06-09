@@ -1,0 +1,53 @@
+type Event {
+    event_id: Int!
+    nama_event: String!
+    deskripsi: String!
+    tanggal_mulai: String!
+    tanggal_selesai: String!
+    status_approval: String!
+}
+
+type RoomBookingStatus {
+    booking_id: Int!
+    event_id: Int!
+    room_id: Int!
+    status_booking: String!
+    tanggal_update: String!
+}
+
+type Query {
+    eventStatus(event_id: Int!): Event
+    roomBookingStatus(booking_id: Int!): RoomBookingStatus
+    allEvents: [Event!]!
+}
+
+input SubmitEventInput {
+    nama_event: String!
+    deskripsi: String!
+    tanggal_mulai: String!
+    tanggal_selesai: String!
+}
+
+input ApproveEventInput {
+    event_id: Int!
+    status_approval: String!
+    catatan: String
+}
+
+input UpdateRoomBookingStatusInput {
+    booking_id: Int!
+    status_booking: String!
+    tanggal_update: String!
+}
+
+type NotifyLogisticsResult {
+    success: Boolean!
+    message: String!
+}
+
+type Mutation {
+    submitEvent(input: SubmitEventInput!): Event
+    approveEvent(input: ApproveEventInput!): Event
+    notifyLogistics(event_id: Int!): NotifyLogisticsResult
+    updateRoomBookingStatus(input: UpdateRoomBookingStatusInput!): RoomBookingStatus
+} 
